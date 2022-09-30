@@ -1,0 +1,20 @@
+name: build
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set version
+        run: echo "PACKAGE_VERSION={{ EVENT_PAYLOAD.release.tag_name }}" >> $GITHUB_ENV
+
+      - name: Test
+        run: echo $GITHUB_ENV
