@@ -23,6 +23,6 @@ jobs:
 
       - name: Dump GitHub context
         env:
-          GITHUB_CONTEXT: ${{ toJson(github).release.tag_name }}
+          GITHUB_CONTEXT: ${{ toJson(github).event.release.tag_name }}
         run: |
           echo "$GITHUB_CONTEXT"
