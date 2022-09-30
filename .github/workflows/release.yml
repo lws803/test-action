@@ -14,7 +14,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set version
-        run: echo "PACKAGE_VERSION=$(echo {{ EVENT_PAYLOAD.release.tag_name }})" >> $GITHUB_ENV
+        env:
+          RELEASE_TAG: ${{ EVENT_PAYLOAD.release.tag_name }}
+        run: echo "PACKAGE_VERSION=$(echo $RELEASE_TAG)" >> $GITHUB_ENV
 
       - name: Test
         run: echo $GITHUB_ENV
